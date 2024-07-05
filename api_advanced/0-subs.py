@@ -1,23 +1,10 @@
 #!/usr/bin/python3
-"""
-reddit_subscribers.py
-
-A script to fetch the number of subscribers for a given subreddit using the Reddit API.
-"""
-
+"""A script to fetch the number of subscribers for a given subreddit using the Reddit API."""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """
-    Fetches the number of subscribers for a given subreddit.
-
-    Args:
-    - subreddit (str): The name of the subreddit.
-
-    Returns:
-    - int: Number of subscribers if successful, 0 if subreddit is invalid or error occurs.
-    """
+    """Fetches the number of subscribers for a given subreddit."""
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {'User-Agent': 'MyBot/1.0 (by /u/MyUsername)'}
 

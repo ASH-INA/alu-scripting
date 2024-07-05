@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""A script to fetch the number of subscribers for a given subreddit using the Reddit API."""
+"""Function to query subscribers on a given Reddit subreddit."""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """Fetches the number of subscribers for a given subreddit."""
+    """Return the total number of subscribers on a given subreddit."""
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {'User-Agent': 'MyBot/1.0 (by /u/MyUsername)'}
 
@@ -19,9 +19,3 @@ def number_of_subscribers(subreddit):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
         return 0
-
-
-if __name__ == "__main__":
-    subreddit = "learnpython"
-    subscribers_count = number_of_subscribers(subreddit)
-    print(f"The subreddit '{subreddit}' has {subscribers_count} subscribers.")

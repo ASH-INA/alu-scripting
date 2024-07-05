@@ -1,25 +1,17 @@
 #!/usr/bin/python3
-"""Function to query subscribers on a given Reddit subreddit."""
-import requests
+"""Module for task 0"""
+
 
 def number_of_subscribers(subreddit):
-    """Return the total number of subscribers on a given subreddit."""
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-    }
+    """Queries the Reddit API and returns the number of subscribers
+    to the subreddit"""
+    import requests
 
-    try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        response.raise_for_status()  # Raise an exception for bad status codes
-        data = response.json().get("data")
-        return data.get("subscribers")  # Return number of subscribers
-    except requests.exceptions.HTTPError as http_err:
-        if response.status_code == 404:
-            return 0  # Subreddit not found
-        else:
-            print(f"HTTP error occurred: {http_err}")
-            return None  # Handle other HTTP errors
-    except Exception as err:
-        print(f"Other error occurred: {err}")
-        return None  # Handle other exceptions
+    sub_info = requests.get("https://www.reddit.com/r/{}/about.json"
+                            .format(subreddit),
+                            headers={"User-Agent": "My-User-Agent"},
+                            allow_redirects=False)
+    if sub_info.status_code >= 300:
+        return 0
+
+    return sub_info.json().get("data").get("subscribers")

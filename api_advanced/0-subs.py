@@ -12,10 +12,12 @@ def number_of_subscribers(subreddit):
         """Try fetching"""
         response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
+            """If ok return subscribers"""
             data = response.json()
             subscribers = data['data']['subscribers']
             return subscribers
         else:
+            """Else return 0"""
             return 0
     except requests.exceptions.RequestException as e:
         """Catch exceptions"""

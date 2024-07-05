@@ -9,6 +9,7 @@ def number_of_subscribers(subreddit):
     headers = {'User-Agent': 'MyBot/1.0 (by /u/MyUsername)'}
 
     try:
+        """Try fetching"""
         response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
             data = response.json()
@@ -17,5 +18,6 @@ def number_of_subscribers(subreddit):
         else:
             return 0
     except requests.exceptions.RequestException as e:
+        """Catch exceptions"""
         print(f"Error fetching data: {e}")
         return 0

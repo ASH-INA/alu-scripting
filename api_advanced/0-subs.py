@@ -11,9 +11,9 @@ def number_of_subscribers(subreddit):
     }
     response = requests.get(url, headers=headers)
     data = response.json()
-    
+
     # Check if the subreddit exists and return the subscriber count
     if 'data' in data and 'subscribers' in data['data']:
         return data['data']['subscribers']
     else:
-        return 0 
+        return 0

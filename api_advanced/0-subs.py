@@ -1,25 +1,17 @@
 #!/usr/bin/python3
-"""Function to query subscribers on a given Reddit subreddit."""
-import requests
+"""Module for task 0"""
 
 
 def number_of_subscribers(subreddit):
-    """Return the total number of subscribers on a given subreddit."""
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'MyBot/1.0 (by /u/MyUsername)'}
+    """Queries the Reddit API and returns the number of subscribers
+    to the subreddit"""
+    import requests
 
-    try:
-        """Try fetching"""
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        if response.status_code == 200:
-            """If ok return subscribers"""
-            data = response.json()
-            subscribers = data['data']['subscribers']
-            return subscribers
-        else:
-            """Else return 0"""
-            return 0
-    except requests.exceptions.RequestException as e:
-        """Catch exceptions"""
-        print(f"Error fetching data: {e}")
+    sub_info = requests.get("https://www.reddit.com/r/{}/about.json"
+                            .format(subreddit),
+                            headers={"User-Agent": "My-User-Agent"},
+                            allow_redirects=False)
+    if sub_info.status_code >= 300:
         return 0
+
+    return sub_info.json().get("data").get("subscribers")

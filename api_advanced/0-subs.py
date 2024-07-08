@@ -7,8 +7,8 @@ def number_of_subscribers(subreddit):
     """Queries the Reddit API and returns the number of subscribers
     to the subreddit"""
 
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)"
-    headers = {'User-Agent': 'MyBot/0.1'}  # Replace with your desired user-agent
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {'User-Agent': 'My-User-Agent'}  # Replace with your desired user-agent
 
     try:
         response = requests.get(url, headers=headers)

@@ -9,7 +9,7 @@ def number_of_subscribers(subreddit):
     headers = {
         "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
     }
-    response = requests.get(url)
+    response = requests.get(url, headers=headers, allow_redirects=False)
     data = response.json()
 
     # Check if the subreddit exists and return the subscriber count

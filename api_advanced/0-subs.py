@@ -11,6 +11,8 @@ def number_of_subscribers(subreddit):
                             .format(subreddit),
                             headers={"User-Agent": "My-User-Agent"},
                             allow_redirects=False)
+    print(sub_info.status_code)
+    print(sub_info.text)
     if sub_info.status_code >= 300:
         return 0
 

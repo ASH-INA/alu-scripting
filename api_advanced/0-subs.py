@@ -14,7 +14,6 @@ def number_of_subscribers(subreddit):
 
     # Check if the subreddit exists and return the subscriber count
     if 'data' in data and 'subscribers' in data['data']:
-        print("OK")
         return data['data']['subscribers']
     else:
-        print("OK")
+        return 0

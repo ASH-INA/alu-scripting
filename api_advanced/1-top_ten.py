@@ -20,3 +20,6 @@ def top_ten(subreddit):
     data = response.json()
     for post in data['data']['children']:
         print(post['data']['title'])
+
+if __name__ == "__main__":
+    top_ten('python')

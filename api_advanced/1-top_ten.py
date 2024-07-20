@@ -33,17 +33,20 @@ def top_ten(subreddit):
 
     """
     # Reddit API endpoint URL for getting hot posts in a subreddit
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     
     # Set custom User-Agent header to prevent 429 (rate limit exceeded) responses
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
                       '(KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
+    params = {
+        "limit":"10"
+    }
     
     try:
         # Make a GET request to the Reddit API
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, params=params)
         
         # Raise an exception for bad status codes
         response.raise_for_status()

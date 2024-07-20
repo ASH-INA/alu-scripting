@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This script queries the Reddit API to fetch."""
 
-import sys
 import requests
 
 def top_ten(subreddit):
@@ -17,15 +16,13 @@ def top_ten(subreddit):
     }
     
     response = requests.get(url, headers=headers, params=params)
-     data = response.json()
-    
-    for i, post in enumerate(data['data']['children'][:10], start=1):
-        print(f"{i}. {post['data']['title']}")
+     if response.status_code == 200:
+        data = response.json()
+        
+        for i, post in enumerate(data['data']['children'][:10], start=1):
+            print(f"{i}. {post['data']['title']}")
+    else:
+        print(None)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 reddit_api_query.py <subreddit>")
-        sys.exit(1)
-    
-    subreddit = sys.argv[1]
     top_ten(subreddit)

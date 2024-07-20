@@ -1,20 +1,7 @@
 #!/usr/bin/python3
 
 """
-Reddit API Query
-
-This script queries the Reddit API to fetch and print the titles of the first
-10 hot posts for a given subreddit.
-
-Usage:
-    $ python3 reddit_api_query.py
-
-Requirements:
-    - Python 3.4.3 or higher
-    - Requests module (install with `pip install requests`)
-    - Proper internet connection
-
-"""
+This script queries the Reddit API to fetch."""
 
 import sys
 import requests
@@ -22,16 +9,7 @@ import logging
 
 def top_ten(subreddit):
     """
-    Fetches and prints the titles of the first 10 hot posts for a given subreddit.
-
-    Args:
-        subreddit (str): The name of the subreddit to fetch posts from.
-
-    Prints:
-        Prints the titles of the first 10 hot posts. If the subreddit is invalid,
-        prints None.
-
-    """
+    Fetches and prints the titles of the first 10 hot posts for given subreddit."""
     # Reddit API endpoint URL for getting hot posts in a subreddit
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     
@@ -44,31 +22,17 @@ def top_ten(subreddit):
         "limit":"10"
     }
     
-    try:
-        # Make a GET request to the Reddit API
-        response = requests.get(url, headers=headers, params=params)
-        
-        # Raise an exception for bad status codes
-        response.raise_for_status()
-        
-        # Extract JSON data from the response
-        data = response.json()
-        
-        # Iterate over the first 10 posts and print their titles
-        for i, post in enumerate(data['data']['children'][:10], start=1):
-            print(f"{i}. {post['data']['title']}")
+    response = requests.get(url, headers=headers, params=params)
     
-    except requests.exceptions.HTTPError as http_err:
-        logging.error(f"HTTP error occurred: {http_err}")
-        print(None)
+    # Raise an exception for bad status codes
+    response.raise_for_status()
     
-    except ValueError as val_err:
-        logging.error(f"Value error occurred: {val_err}")
-        print(None)
+    # Extract JSON data from the response
+    data = response.json()
     
-    except Exception as err:
-        logging.error(f"An error occurred: {err}")
-        print(None)
+    # Iterate over the first 10 posts and print their titles
+    for i, post in enumerate(data['data']['children'][:10], start=1):
+        print(f"{i}. {post['data']['title']}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -77,4 +41,3 @@ if __name__ == "__main__":
     
     subreddit = sys.argv[1]
     top_ten(subreddit)
-
